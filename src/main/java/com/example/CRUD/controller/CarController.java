@@ -1,7 +1,7 @@
-package com.example.CRUD.API.Controller;
+package com.example.CRUD.controller;
 
-import com.example.CRUD.Domain.Model.Car;
-import com.example.CRUD.Domain.Service.CarService;
+import com.example.CRUD.domain.Car;
+import com.example.CRUD.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +31,13 @@ public class CarController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Car> insert(@RequestBody Car car) {
+    public ResponseEntity<Long> insert(@RequestBody Car car) {
         return ResponseEntity.of(Optional.of(carService.insert(car)));
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Car> update( @RequestBody Car newCar) {
+    public ResponseEntity<Long> update(@RequestBody Car newCar) {
         return ResponseEntity.of(Optional.ofNullable(carService.update(newCar)));
     }
 
