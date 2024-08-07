@@ -3,6 +3,8 @@ package com.example.CRUD.controller;
 import com.example.CRUD.domain.Car;
 import com.example.CRUD.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,8 @@ public class CarController {
 
     @GetMapping("/pageable")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Car>> findAll() {
-        return ResponseEntity.of(Optional.of(carService.findAll()));
+    public ResponseEntity<Page<Car>> findAll(Pageable pageable) {
+        return ResponseEntity.of(Optional.of(carService.findAll(pageable)));
     }
 
     @GetMapping("/{id}")

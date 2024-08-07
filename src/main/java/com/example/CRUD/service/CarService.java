@@ -4,6 +4,8 @@ import com.example.CRUD.domain.Car;
 import com.example.CRUD.repository.CarRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class CarService {
     private final CarRepository carRepo;
 
     @Transactional
-    public List<Car> findAll() {
-        return carRepo.findAll();
+    public Page<Car> findAll(Pageable pageable) {
+        return carRepo.findAll(pageable);
     }
 
     @Transactional
