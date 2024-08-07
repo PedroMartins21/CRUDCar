@@ -20,7 +20,6 @@ public class CarService {
     private final CarRepository carRepo;
     private final CarMapper carMapper;
 
-
     @Transactional
     public Page<Car> findAll(Pageable pageable) {
         return carRepo.findAll(pageable);
@@ -36,16 +35,14 @@ public class CarService {
         return carRepo.save(carMapper.toCar(car)).getId();
     }
 
-
     @Transactional
     public Long update(CarPutRequestBody carPutRequestBody) {
-       return carRepo.save(carMapper.toCar(carPutRequestBody)).getId();
+        return carRepo.save(carMapper.toCar(carPutRequestBody)).getId();
     }
 
     @Transactional
     public void delete(Long id) {
         carRepo.deleteById(id);
     }
-
 
 }
