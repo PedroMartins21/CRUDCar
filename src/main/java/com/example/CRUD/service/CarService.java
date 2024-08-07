@@ -1,7 +1,10 @@
 package com.example.CRUD.service;
 
+import com.example.CRUD.Mapper.CarMapper;
 import com.example.CRUD.domain.Car;
 import com.example.CRUD.repository.CarRepository;
+import com.example.CRUD.requests.CarPostRequestBody;
+import com.example.CRUD.requests.CarPutRequestBody;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class CarService {
 
     private final CarRepository carRepo;
+    private final CarMapper carMapper;
+
 
     @Transactional
     public Page<Car> findAll(Pageable pageable) {
@@ -27,26 +32,14 @@ public class CarService {
     }
 
     @Transactional
-    public Long insert(Car car) {
-        car.setId(null);
-        return carRepo.save(car).getId();
+    public Long insert(CarPostRequestBody car) {
+        return carRepo.save(carMapper.toCar(car)).getId();
     }
 
 
     @Transactional
-    public Long update(Car newCar) {
-        Optional<Car> car = carRepo.findById(newCar.getId());
-        car.ifPresent(entity -> {
-
-            entity.setName(newCar.getName());
-            entity.setNameplate(newCar.getNameplate());
-            entity.setPrice(newCar.getPrice());
-            entity.setCarYear(newCar.getCarYear());
-
-            carRepo.save(entity);
-        });
-
-        return newCar.getId();
+    public Long update(CarPutRequestBody carPutRequestBody) {
+       return carRepo.save(carMapper.toCar(carPutRequestBody)).getId();
     }
 
     @Transactional

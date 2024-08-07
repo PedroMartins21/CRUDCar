@@ -1,7 +1,11 @@
 package com.example.CRUD.controller;
 
 import com.example.CRUD.domain.Car;
+import com.example.CRUD.requests.CarPostRequestBody;
+import com.example.CRUD.requests.CarPutRequestBody;
 import com.example.CRUD.service.CarService;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/car")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CarController {
 
     private final CarService carService;
@@ -32,13 +36,13 @@ public class CarController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Long> insert(@RequestBody Car car) {
+    public ResponseEntity<Long> insert(@RequestBody CarPostRequestBody car) {
         return ResponseEntity.of(Optional.of(carService.insert(car)));
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Long> update(@RequestBody Car newCar) {
+    public ResponseEntity<Long> update(@Valid @RequestBody CarPutRequestBody newCar) {
         return ResponseEntity.of(Optional.ofNullable(carService.update(newCar)));
     }
 
