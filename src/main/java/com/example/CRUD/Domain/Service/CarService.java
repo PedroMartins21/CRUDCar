@@ -28,7 +28,7 @@ public class CarService {
     }
 
 
-    public Car updateCar( Car newCar) {
+    public Car update( Car newCar) {
         Optional<Car> car = carRepo.findById(newCar.getId());
         car.ifPresent(entity -> {
 

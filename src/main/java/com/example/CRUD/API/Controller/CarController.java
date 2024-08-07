@@ -38,7 +38,7 @@ public class CarController {
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Car> update( @RequestBody Car newCar) {
-        return ResponseEntity.of(Optional.ofNullable(carService.updateCar(newCar)));
+        return ResponseEntity.of(Optional.ofNullable(carService.update(newCar)));
     }
 
     @DeleteMapping
